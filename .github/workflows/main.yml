@@ -152,17 +152,14 @@ jobs:
             sudo docker compose -f docker-compose.production.yml down
             sudo docker compose -f docker-compose.production.yml up -d
             
-            # Wait for backend to be ready
-            sleep 10
+            # Wait for postgres to be ready
+            sleep 15
             
             # Run migrations
             sudo docker compose -f docker-compose.production.yml exec -T backend python manage.py migrate
             
-            # Collect static files
+            # Collect static files (they will be automatically available to gateway via shared volume)
             sudo docker compose -f docker-compose.production.yml run --rm backend python manage.py collectstatic --no-input
-            
-            # Copy static files to gateway volume
-            sudo docker cp $(sudo docker compose -f docker-compose.production.yml ps -q backend):/app/collected_static/. $(sudo docker compose -f docker-compose.production.yml ps -q gateway):/static/
 
   auto_tests:
     runs-on: ubuntu-latest
