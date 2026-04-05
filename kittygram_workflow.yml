@@ -65,7 +65,7 @@ jobs:
         continue-on-error: true
         run: |
           pip install flake8
-          flake8 backend/
+          flake8 backend/ --exclude=backend/cats/migrations
 
   build_and_push_to_docker_hub:
     name: Push Docker image to Docker Hub
