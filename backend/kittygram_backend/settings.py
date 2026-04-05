@@ -17,8 +17,6 @@ DEBUG = os.getenv('DEBUG', 'True').lower() in ('true', '1')
 
 ALLOWED_HOSTS = ['*']
 
-STATIC_ROOT = "/app/collected_static"
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -117,7 +115,7 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static', 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
